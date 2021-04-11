@@ -1,8 +1,5 @@
 dist: bionic
 language: go
-branches:
-  only:
-    - main
 go:
 - "1.15"
 script:
