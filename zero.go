@@ -38,16 +38,27 @@ func isZero(v reflect.Value) bool {
 		}
 		return true
 
-	case reflect.Slice, reflect.String, reflect.Map:
-		return v.Len() == 0
-
-	case reflect.Struct:
-		for i, n := 0, v.NumField(); i < n; i++ {
-			if !isZero(v.Field(i)) {
+	case reflect.Slice:
+		for i := 0; i < v.Len(); i++ {
+			if !isZero(v.Index(i)) {
 				return false
 			}
 		}
 		return true
+
+	case reflect.String, reflect.Map:
+		return v.Len() == 0
+
+	case reflect.Struct:
+		if v.NumField() == 0 {
+			return true
+		}
+		for i, n := 0, v.NumField(); i < n; i++ {
+			if isZero(v.Field(i)) {
+				return true
+			}
+		}
+		return false
 	// reflect.Chan, reflect.UnsafePointer, reflect.Func
 	default:
 		return v.IsNil()

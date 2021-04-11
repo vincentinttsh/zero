@@ -1,10 +1,12 @@
+dist: bionic
 language: go
+branches:
+  only:
+    - main
 go:
-  - 1.4
-  - 1.5
-  - 1.6
-before_install:
-  - go get github.com/mattn/goveralls
-  - go get golang.org/x/tools/cmd/cover
+- "1.15"
 script:
-  - $HOME/gopath/bin/goveralls -service=travis-ci
+- go build ./...
+- go test -race -coverprofile=coverage.txt -covermode=atomic ./...
+after_success:
+- bash <(curl -s https://codecov.io/bash)

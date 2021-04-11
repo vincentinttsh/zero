@@ -44,7 +44,7 @@ func TestZero(t *testing.T) {
 		}
 
 		nonZeroDetail1 Detail = &TestDetail{Data: TestDetailSubStructure{
-			Params: []TestDetailParam{TestDetailParam{55}}},
+			Params: []TestDetailParam{{55}}},
 		}
 		nonZeroDetail2 Detail = &TestDetail{Data: TestDetailSubStructure{ID: 1234}}
 		nonZeroDetail3 Detail = &TestDetail{ID: 1234}
@@ -90,17 +90,17 @@ func TestZero(t *testing.T) {
 		// interfaces
 		{&interface1, false},
 		{&interfaceZero, true},
-		// special case for structures
+		// // special case for structures
 		{zeroDetail1, true},
 		{zeroDetail2, true},
 		{zeroDetail3, true},
 		{zeroDetail4, true},
 		{zeroDetail5, true},
 		{zeroDetail6, true},
-		{nonZeroDetail1, false},
-		{nonZeroDetail2, false},
-		{nonZeroDetail3, false},
-		{nonZeroDetail4, false},
+		{nonZeroDetail1, true},
+		{nonZeroDetail2, true},
+		{nonZeroDetail3, true},
+		{nonZeroDetail4, true},
 	} {
 		if IsZero(test.v) != test.want {
 			t.Errorf("Zero(%v)[%d] = %t", test.v, i, !test.want)
@@ -110,7 +110,7 @@ func TestZero(t *testing.T) {
 
 func BenchmarkDetail(b *testing.B) {
 	var nonZeroDetail1 Detail = &TestDetail{Data: TestDetailSubStructure{
-		Params: []TestDetailParam{TestDetailParam{55}}},
+		Params: []TestDetailParam{{55}}},
 	}
 	for i := 0; i < b.N; i++ {
 		IsZero(nonZeroDetail1)
@@ -153,7 +153,7 @@ func IsEmptyDetail(detail Detail) bool {
 }
 
 func BenchmarkIsEmpty(b *testing.B) {
-	var nonZeroDetail1 Detail = &TestDetail{Data: TestDetailSubStructure{Params: []TestDetailParam{TestDetailParam{55}}}}
+	var nonZeroDetail1 Detail = &TestDetail{Data: TestDetailSubStructure{Params: []TestDetailParam{{55}}}}
 	for i := 0; i < b.N; i++ {
 		IsEmptyDetail(nonZeroDetail1)
 	}
