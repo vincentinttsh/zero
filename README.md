@@ -1,4 +1,4 @@
-# cydev/zero
+# vincentinttsh/zero
 Check if golang struct is empty
 
 ``` go
@@ -7,7 +7,7 @@ package main
 import (
         "fmt"
 
-        "github.com/cydev/zero"
+        "github.com/vincentinttsh/zero"
 )
 
 type Structure struct {
