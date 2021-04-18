@@ -28,7 +28,7 @@ func isZero(v reflect.Value) bool {
 		return v.Complex() == 0
 
 	case reflect.Ptr, reflect.Interface:
-		return isZero(v.Elem())
+		return v.IsNil()
 
 	case reflect.Array:
 		for i := 0; i < v.Len(); i++ {

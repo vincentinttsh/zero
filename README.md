@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/vincentinttsh/zero.svg?branch=master)](https://travis-ci.com/vincentinttsh/zero)
 [![codecov](https://codecov.io/gh/vincentinttsh/zero/branch/master/graph/badge.svg?token=NATJW3S1UO)](https://codecov.io/gh/vincentinttsh/zero)
 [![Go Report Card](https://goreportcard.com/badge/github.com/vincentinttsh/zero)](https://goreportcard.com/report/github.com/vincentinttsh/zero)
-
+[![GoDoc](https://godoc.org/github.com/vincentinttsh/zero?status.svg)](https://godoc.org/github.com/vincentinttsh/zero)
 
 Check if golang struct is empty
 

@@ -77,8 +77,8 @@ func TestZero(t *testing.T) {
 		{map[string][]int(nil), true},
 		// pointers
 		{&one, false},
-		{&zeroInt, true},
-		{new(bytes.Buffer), true},
+		{&zeroInt, false},
+		{new(bytes.Buffer), false},
 		// functions
 		{(func())(nil), true},
 		{func() {}, false},
@@ -89,18 +89,18 @@ func TestZero(t *testing.T) {
 		{zeroChan, true},
 		// interfaces
 		{&interface1, false},
-		{&interfaceZero, true},
+		{&interfaceZero, false},
 		// // special case for structures
-		{zeroDetail1, true},
-		{zeroDetail2, true},
+		{zeroDetail1, false},
+		{zeroDetail2, false},
 		{zeroDetail3, true},
-		{zeroDetail4, true},
-		{zeroDetail5, true},
-		{zeroDetail6, true},
-		{nonZeroDetail1, true},
-		{nonZeroDetail2, true},
-		{nonZeroDetail3, true},
-		{nonZeroDetail4, true},
+		{zeroDetail4, false},
+		{zeroDetail5, false},
+		{zeroDetail6, false},
+		{nonZeroDetail1, false},
+		{nonZeroDetail2, false},
+		{nonZeroDetail3, false},
+		{nonZeroDetail4, false},
 	} {
 		if IsZero(test.v) != test.want {
 			t.Errorf("Zero(%v)[%d] = %t", test.v, i, !test.want)
@@ -176,12 +176,12 @@ func ExampleStructure() {
 	nonZero := Structure{ID: 1}
 	nonZeroPointer := &nonZero
 	fmt.Println(IsZero(zeroStructure))        // true
-	fmt.Println(IsZero(zeroStructurePointer)) // true
+	fmt.Println(IsZero(zeroStructurePointer)) // false
 	fmt.Println(IsZero(nonZero))              // false
 	fmt.Println(IsZero(nonZeroPointer))       // false
 	// Output:
 	// true
-	// true
+	// false
 	// false
 	// false
 }
